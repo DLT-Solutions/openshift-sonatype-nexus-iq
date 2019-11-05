@@ -32,33 +32,22 @@ This is actually not too bad to deploy - a bit more manual than the Nexus deploy
 8. ??????
 9. PROFIT!!!!1
 
-## Container Image Additions
-
-The container, found at [https://hub.docker.com/r/kenmoini/openshift-sonatype-nexus](https://hub.docker.com/r/kenmoini/openshift-sonatype-nexus) has some additional bits stuffed into the image.
-
-### LDAP and Self-Signed Certificates
-JavaX doesn't accept self-signed certificates when using LDAPS connectivity.  In order to get past this for normal LDAP deployments, you must import the certificates into the JRE keystore.
-
-To do this, there is a script, ```ss-ca-puller.sh```, that will loop through a list of hosts, connect and retrieve their SSL certificate, then add it to the JRE keystore.
-
-To add your own self-signed SSL certificates to the keystore you will need to modify the domain list in this Dockerfile and build the Docker image yourself - I do so everytime I use this for a workshop because the LDAP/RH IDM server is ephemeral and certificates change from workshop to workshop.
-
 ## LDAP
 
-The whole point of Nexus Repo Manager is to centrally manage components and repositories across your organization so every developer shouldn't have their own Nexus.  The easiest way to deploy Nexus centrally is via LDAP.
+The whole point of Nexus Platform is to centrally manage components and repositories across your organization so every developer shouldn't have their own Nexus/IQ Server.  The easiest way to deploy IQ Server centrally is via LDAP.
 
 ### Configure LDAP
 
-1. Log into Nexus as an Admin, click on the ***Settings*** cog button to the left of the Search bar at the top.
-2. Use the pane to the left to navigate to ```Administration > Security > LDAP```
-3. Click ***Create Connection***
+1. Log into IQ Server as an Admin, click on the **System Preferences** cog button to the right of the bar at the top.
+2. Use the drop down to choose **LDAP**
+3. Click ***Add a Server***
 4. Configure the Connection as follows *(assuming Red Hat Identity Management setup for LDAPS)*:
   - **Name**: IDM
   - **Protocol**: LDAPS
   - **Hostname**: idm.example.com
   - **Port**: 636
   - **Search Base**: dc=example,dc=com
-  - **Authentication Method**: Simple Authentication
+  - **Authentication Method**: SIMPLE
   - **Username or DN**: CN=Directory Manager
   - **Password**: duh
   - **Connection Rules**: Default is fine

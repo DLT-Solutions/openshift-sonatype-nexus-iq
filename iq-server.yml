@@ -44,7 +44,7 @@ objects:
             command:
               - "/bin/bash"
               - "-c"
-              - "curl -o /tmp/iq-server-functions -s https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus/master/scripts/iq-server-functions; source /tmp/iq-server-functions;"
+              - "curl -o /tmp/iq-server-functions -s https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus-iq/master/scripts/iq-server-functions; source /tmp/iq-server-functions;"
       type: Rolling
     template:
       metadata:
@@ -55,6 +55,8 @@ objects:
         - env:
           - name: CONTEXT_PATH
             value: /
+          - name: JAVA_OPTS
+            value: "-Djava.util.prefs.userRoot=/sonatype-work/javaprefs -Djavax.net.ssl.trustStorePassword=changeit"
           image: ' '
           imagePullPolicy: IfNotPresent
           livenessProbe:
