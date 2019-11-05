@@ -87,24 +87,24 @@ Then click ***Save***.  Wait a few moments and with any luck, IQ Server will res
   - **Port**: 636
   - **Search Base**: dc=example,dc=com
   - **Authentication Method**: SIMPLE
+  - **SASL Realm**: *(blank)*
   - **Username or DN**: CN=Directory Manager
   - **Password**: duh
-  - **Connection Rules**: Default is fine
-5. Click ***Verify Connection*** and if successful, click **Next**
-6. Now set the User and Group configuration as such:
+  - **Timeouts**: Default is fine
+5. Click ***Test Connection*** and if successful, click **Save**
+6. Now click the User and Group tab and set the configuration as such:
   - **Configuration template**: Generic LDAP Server
   - **Base DN**: CN=accounts
-  - **User subtree**: *Checked*
+  - **Include User Subtree?**: *Checked*
   - **Object class**: inetOrgPerson
   - **User filter**: *(blank)*
   - **User ID attribute**: uid
   - **Real name attribute**: cn
   - **Email attribute**: mail
   - **Password attribute**: *(blank)*
-  - **Map LDAP groups as roles**: *Checked*
   - **Group type**: Dynamic Groups
   - **Group member of attribute**: memberOf
-7. Click ***Verify user mapping*** to ensure it can enumerate the targeted group of users
-8. Click ***Verify login*** and select a random user from LDAP to test
+7. Click ***Check user mapping*** to ensure it can enumerate the targeted group of users
+8. Click ***Check login*** and select a random user from LDAP to test
 9. Click ***Save***
 10. Log out and log in as one of the users from LDAP for a final test.  You should see nothing because the user group has not been mapped to a role yet.
