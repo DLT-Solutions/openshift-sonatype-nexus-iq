@@ -45,16 +45,18 @@ echo -e "Starting SSL Certificate import...\n"
 
 for CERT in "$@"
 do
-  echo "Pulling SSL certificate for ${CERT}..."
+  echo -e "Processing ${CERT}...\n"
   FILENAME=${CERT//":"/".p"}
   CERTNAME=${FILENAME//"."/"-"}
-  keytool -printcert -rfc -sslServer ${CERT} > /tmp/$FILENAME.pem
   echo "Checking if certificate exists in keystore..."
   testCert $CUSTOM_TRUSTSTORE/cacerts $CERTNAME
   if [ $? -eq 42 ]; then
     echo "Certificate already exists, skipping..."
   else
     echo "Certificate not in keystore, importing..."
+    echo "Pulling SSL certificate for ${CERT}..."
+    keytool -printcert -rfc -sslServer ${CERT} > /tmp/$FILENAME.pem
+    echo "Importing SSL certificate ${CERT} with alias ${CERTNAME}..."
     keytool -import -noprompt -storepass changeit -file /tmp/$FILENAME.pem -alias $CERTNAME -keystore $CUSTOM_TRUSTSTORE/cacerts
   fi
   echo ""
