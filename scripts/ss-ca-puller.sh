@@ -34,7 +34,6 @@ CUSTOM_TRUSTSTORE="/sonatype-work/.cacerts"
 if [ ! -f "$CUSTOM_TRUSTSTORE/cacerts" ]; then
     echo "No local keystore found, creating..."
     mkdir -p $CUSTOM_TRUSTSTORE
-    JHOME=determineJavaHome
     cp $JHOME/lib/security/cacerts $CUSTOM_TRUSTSTORE
 fi
 

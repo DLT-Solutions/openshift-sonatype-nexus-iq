@@ -18,7 +18,7 @@ objects:
     tags:
     - from:
         kind: DockerImage
-        name: docker.io/kenmoini/openshift-nexus-iq:${NEXUS_IQ_VERSION}
+        name: docker.io/sonatype/nexus-iq-server:${NEXUS_IQ_VERSION}
       name: ${NEXUS_IQ_VERSION}
 - apiVersion: v1
   kind: DeploymentConfig
