@@ -1,6 +1,6 @@
 # Sonatype IQ Server on OpenShift
 
-In order to operate this you'll need a license.  Contact [Fierce Software](https://fiercesw.com/request-a-demo) for a trial license.
+In order to operate this you'll need an OpenShift cluster with Persistent Volumes and a license for Sonatype Nexus IQ Server.  Contact [Fierce Software](https://fiercesw.com/request-a-demo) for a trial license.
 
 ## Deployment - Via OC CLI
 
@@ -11,27 +11,29 @@ This is actually not too bad to deploy - a bit more manual than the Nexus deploy
 3. Import your license file (rename to iq-server-license.lic) to this directory
 4. Switch to your CI/CD namespace or where you have Nexus/want IQ
 
-  ```
+  ```bash
   $ oc project nexus-iq-server
   ```
 
 5. Create a ConfigMap from the config.yaml file:
 
-  ```
+  ```bash
   $ oc create configmap --from-file=config.yml iq-server-config
   ```
 
 6. Create a Secret from the license file:
 
-  ```
+  ```bash
   $ oc create secret generic iq-server-license --from-file=iq-server-license.lic
   ```
 
 7. Deploy IQ Server
 
-  ```
+  ```bash
   $ oc create -f iq-server.yml   #Ephermial
+  $ oc create -f iq-server-secure.yml   #Ephermial with an Edge Terminated TLS Secured Route
   $ oc create -f iq-server-persistent.yml   # Persistent Data Volume backed
+  $ oc create -f iq-server-persistent-secure.yml   # Persistent Data Volume backed with an Edge Terminated TLS Secured Route
   ```
   
 8. ??????
