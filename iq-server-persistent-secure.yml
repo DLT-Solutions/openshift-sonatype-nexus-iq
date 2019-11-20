@@ -40,7 +40,7 @@ objects:
             command:
               - "/bin/bash"
               - "-c"
-              - "curl -o /tmp/iq-server-functions -s https://raw.githubusercontent.com/kenmoini/openshift-sonatype-nexus-iq/master/scripts/iq-server-functions; source /tmp/iq-server-functions;"
+              - "curl -o /tmp/iq-server-functions -s https://raw.githubusercontent.com/DLT-Solutions/openshift-sonatype-nexus-iq/master/scripts/iq-server-functions; source /tmp/iq-server-functions;"
       type: Recreate
     template:
       metadata:
